@@ -1,6 +1,6 @@
 # Think In Java Application
 
-### Describe the application 
+### Descriere aplicatie 
 	Aplicatie care gestioneaza o baza de date la un magazin online. Aplicatia are urmatoarele functionalitati:
 		1. Afisare produse pagina web
 		2. Import produse in format csv
@@ -20,4 +20,4 @@
 
 
 
-
+ 
