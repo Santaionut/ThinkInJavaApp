@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div>
+    <p th:text="'Numarul de produse in baza de date sunt ' + ${numberProducts} + ''" />
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th> Id </th>
+        <th> Name </th>
+        <th> Price </th>
+        <th> Description </th>
+        <th> Short Description </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${products.empty}">
+        <td colspan="2"> No products Available </td>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td><span th:text="${product.idproduct}"> </span></td>
+        <td><span th:text="${product.name}"> </span></td>
+        <td><span th:text="${product.price}"></span></td>
+        <td><span th:text="${product.description}"></span></td>
+        <td><span th:text="${product.short_description}"></span></td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+
+</body>
+</html>

@@ -1,4 +1,0 @@
-entity-packages: model
-querybean-packages:
-transactional-packages:
-profile-location: true
