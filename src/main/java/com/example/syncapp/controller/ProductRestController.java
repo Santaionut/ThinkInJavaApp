@@ -6,11 +6,13 @@ import com.example.syncapp.model.Product;
 import com.example.syncapp.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -26,12 +28,22 @@ public class ProductRestController  {
         return  productRepository.findAll();
     }
 
-    @GetMapping("/sortProductsByFieldAsc")
+    @RequestMapping(value = "/sortProductsByFieldAsc", method = RequestMethod.GET,produces = MediaType.APPLICATION_XML_VALUE)
     public List<Product> sortProductsByFieldAsc(@PathParam(value = "field") String field ){
-
         return productRepository.findAll(Sort.by(field).ascending());
     }
 
+
+    @RequestMapping(value = "/sortProductsByFieldDesc", method = RequestMethod.GET,produces = MediaType.APPLICATION_XML_VALUE)
+    public List<Product> sortProductsByFieldDesc(@PathParam(value = "field") String field ){
+        return productRepository.findAll(Sort.by(field).ascending());
+    }
+
+    @RequestMapping(value="/productFindByID", method=RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
+    public Optional<Product> findById(@PathParam("id") Long id) {
+
+        return productRepository.findById(id);
+    }
 
     @PostMapping("/products")
     public Product createNote(@Valid @RequestBody Product product) {
