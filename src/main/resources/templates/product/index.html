@@ -13,6 +13,11 @@ table, th, td {
 <body>
 
 <div>
+<!--    <a action="#" th:action="@{/importProducts}">Import Products</a>-->
+    <a th:href="@{/importProducts}">Import Products</a>
+</div>
+
+<div>
     <p th:text="'Numarul de produse in baza de date sunt ' + ${numberProducts} + ''" />
 </div>
 

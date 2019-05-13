@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Hello Spring Security</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/main.css" th:href="@{/css/main.css}" />
+
+</head>
+<body>
+
+<div th:if="${fileSize}">
+    <span>File size is : </span>
+    <h2 th:text="${fileSize}"/>
+</div>
+
+<div>
+
+    <form method="POST" action="#" th:action="@{/importProducts}" enctype="multipart/form-data">
+        <input type="file" name="file" /><br/><br/>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+
+<div>
+    <ul>
+        <li th:each="file : ${files}">
+            <a th:href="${file}" th:text="${file}" />
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

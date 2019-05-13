@@ -2,9 +2,9 @@
 
 ### Descriere aplicatie 
 	Aplicatie care gestioneaza o baza de date la un magazin online. Aplicatia are urmatoarele functionalitati:
-		1. Afisare produse pagina web
-		2. Import produse in format csv
-		3. Export produse in format Json
+		1. Afisare produse pagina web (done) 
+		2. Import produse in format csv (done)
+		3. Export produse in format Json (done)
 		4. Export produse in format XML + filtre 
 
 
