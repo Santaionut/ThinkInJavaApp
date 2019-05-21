@@ -16,8 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/css/**", "/index").permitAll()
-                .antMatchers("/product/**").hasRole("USER")
                 .and()
+                .csrf().disable()
                 .formLogin()
                 .loginPage("/login").failureUrl("/login-error");
     }

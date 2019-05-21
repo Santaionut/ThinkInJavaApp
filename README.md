@@ -5,7 +5,7 @@
 		1. Afisare produse pagina web (done) 
 		2. Import produse in format csv (done)
 		3. Export produse in format Json (done)
-		4. Export produse in format XML + filtre 
+		4. Export produse in format XML + filtre (done)
 
 
 

@@ -1,4 +1,4 @@
-package com.example.syncapp.controller;
+package com.example.syncapp.controller.rest;
 
 
 import com.example.syncapp.exception.ResourceNotFoundException;
@@ -46,7 +46,7 @@ public class ProductRestController  {
     }
 
     @PostMapping("/products")
-    public Product createNote(@Valid @RequestBody Product product) {
+    public Product createProduct(@Valid @RequestBody Product product) {
         return productRepository.save(product);
     }
 
