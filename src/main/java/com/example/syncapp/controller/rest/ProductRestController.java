@@ -28,13 +28,13 @@ public class ProductRestController  {
         return  productRepository.findAll();
     }
 
-    @RequestMapping(value = "/sortProductsByFieldAsc", method = RequestMethod.GET,produces = MediaType.APPLICATION_XML_VALUE)
+    @RequestMapping(value = "/sortProductsByFieldAsc", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public List<Product> sortProductsByFieldAsc(@PathParam(value = "field") String field ){
         return productRepository.findAll(Sort.by(field).ascending());
     }
 
 
-    @RequestMapping(value = "/sortProductsByFieldDesc", method = RequestMethod.GET,produces = MediaType.APPLICATION_XML_VALUE)
+    @RequestMapping(value = "/sortProductsByFieldDesc", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public List<Product> sortProductsByFieldDesc(@PathParam(value = "field") String field ){
         return productRepository.findAll(Sort.by(field).ascending());
     }
