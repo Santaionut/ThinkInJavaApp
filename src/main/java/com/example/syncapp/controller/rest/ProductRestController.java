@@ -36,7 +36,7 @@ public class ProductRestController  {
 
     @RequestMapping(value = "/sortProductsByFieldDesc", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
     public List<Product> sortProductsByFieldDesc(@PathParam(value = "field") String field ){
-        return productRepository.findAll(Sort.by(field).ascending());
+        return productRepository.findAll(Sort.by(field).descending());
     }
 
     @RequestMapping(value="/productFindByID", method=RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)

@@ -2,8 +2,13 @@ package com.example.syncapp.controller.rest;
 
 
 import com.example.syncapp.model.Product;
+import com.example.syncapp.repository.ProductRepository;
+import com.sun.deploy.xml.XMLAttribute;
+import com.sun.deploy.xml.XMLParser;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -15,6 +20,10 @@ import static org.junit.Assert.assertTrue;
 
 public class ProductRestControllerTest  extends  AbstractTest{
 
+
+    @Autowired
+    ProductRepository productRepository;
+
     @Override
     @Before
     public void setUp() {
@@ -23,7 +32,7 @@ public class ProductRestControllerTest  extends  AbstractTest{
 
 
     @Test
-    public void getProductsList() throws Exception {
+    public void findAll() throws Exception {
         String uri = "/api/products";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
@@ -74,7 +83,7 @@ public class ProductRestControllerTest  extends  AbstractTest{
     }
 
     @Test
-    public void findById() throws Exception{
+    public void getProductById() throws Exception{
         String uri = "/api/product/1";
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
@@ -86,4 +95,59 @@ public class ProductRestControllerTest  extends  AbstractTest{
     }
 
 
+    @Test
+    public void sortProductsByFieldAsc() throws Exception {
+        String uri = "/api/sortProductsByFieldAsc?field=name";
+
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_XML_VALUE)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+        String content = mvcResult.getResponse().getContentAsString();
+        System.out.println("content "+ content);
+
+        XMLParser parser = new XMLParser(content);
+        Long idProduct = Long.parseLong(parser.parse(true).getNested().getNested().getNested().getName());
+        Long idProductExpected = productRepository.findAll(Sort.by("name").ascending()).get(0).getIdproduct();
+
+        assertEquals(idProduct, idProductExpected);
+    }
+
+
+    @Test
+    public void sortProductsByFieldDesc() throws Exception {
+        String uri = "/api/sortProductsByFieldDesc?field=name";
+
+
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_XML_VALUE)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+        String content = mvcResult.getResponse().getContentAsString();
+        System.out.println("content "+ content);
+
+        XMLParser parser = new XMLParser(content);
+        Long idProduct = Long.parseLong(parser.parse(true).getNested().getNested().getNested().getName());
+        Long idProductExpected = productRepository.findAll(Sort.by("name").descending()).get(0).getIdproduct();
+
+        assertEquals(idProduct, idProductExpected);
+    }
+
+
+    @Test
+    public void findById() throws Exception {
+        String uri = "/api/productFindByID?id=1";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_XML_VALUE)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200, status);
+        String content = mvcResult.getResponse().getContentAsString();
+
+        XMLParser parser = new XMLParser(content);
+        String nameProduct = parser.parse(true).getNested().getNext().getNested().getName();
+        assertEquals(nameProduct, "Lemon");
+    }
 }

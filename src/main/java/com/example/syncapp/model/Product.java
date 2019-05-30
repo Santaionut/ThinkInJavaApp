@@ -14,20 +14,20 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long idproduct;
+    private Long idproduct;
 
     @Column(name = "name")
-    public String name;
+    private String name;
 
 
     @Column(name = "description")
-    public String description;
+    private String description;
 
     @Column(name = "short_description")
-    public String short_description;
+    private String short_description;
 
     @Column(name = "price")
-    public Float price;
+    private Float price;
 
 
     public Long getIdproduct() {
